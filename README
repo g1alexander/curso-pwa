@@ -1,0 +1,12 @@
+# 01 - fundamentos
+
+Documentaciones útiles
+Aquí les dejo unos enlaces para que puedan leer más al respecto de lo visto en esta parte del fetch
+
+URL - CreateObjectUrl https://developer.mozilla.org/en-US/docs/Web/API/URL
+
+XmlHttpRequest https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
+
+Methods del response https://developer.mozilla.org/en-US/docs/Web/API/Response
+
+Fetch API https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch
