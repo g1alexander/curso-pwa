@@ -1,11 +1,9 @@
-(function() {
+(function () {
   "use strict";
 
-
-  if ( navigator.serviceWorker ) {
-    navigator.serviceWorker.register('/sw.js');
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register("/sw.js");
   }
-
 
   var ENTER_KEY = 13;
   var newTodoDom = document.getElementById("new-todo");
@@ -18,19 +16,17 @@
 
   db.changes({
     since: "now",
-    live: true
+    live: true,
   }).on("change", showTodos);
 
   // We have to create a new todo document and enter it in the database
   function addTodo(text) {
-
-    if ( text.length <= 0 ) return;
-
+    if (text.length <= 0) return;
 
     var todo = {
       _id: new Date().toISOString(),
       title: text,
-      completed: false
+      completed: false,
     };
 
     // db.put(todo, function callback(err, result) {
@@ -38,9 +34,7 @@
     //     console.log('Successfully posted a todo!');
     //   }
     // });
-    db.put(todo)
-      .then(console.log("Insertado"))
-      .catch(console.log);
+    db.put(todo).then(console.log("Insertado")).catch(console.log);
   }
 
   // Show the current list of todos by reading them from the database
@@ -49,12 +43,13 @@
     //   redrawTodosUI(doc.rows);
     // });
 
-    db.allDocs({ include_docs: true, descending: false }).then(doc => {
+    db.allDocs({ include_docs: true, descending: false }).then((doc) => {
       redrawTodosUI(doc.rows);
     });
   }
 
   function checkboxChanged(todo, event) {
+    console.log(todo, "adAS");
     todo.completed = event.target.checked;
     db.put(todo); // .then( console.log('registro actualizado') );
   }
@@ -67,7 +62,6 @@
   // The input box when editing a todo has blurred, we should save
   // the new title or delete the todo if the title is empty
   function todoBlurred(todo, event) {
-
     var trimmedText = event.target.value.trim();
 
     if (!trimmedText) {
@@ -76,7 +70,6 @@
       todo.title = trimmedText;
       db.put(todo);
     }
-
   }
 
   // Initialise a sync with the remote server
@@ -151,7 +144,7 @@
   function redrawTodosUI(todos) {
     var ul = document.getElementById("todo-list");
     ul.innerHTML = "";
-    todos.forEach(function(todo) {
+    todos.forEach(function (todo) {
       ul.appendChild(createTodoListItem(todo.doc));
     });
   }
